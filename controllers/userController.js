@@ -1,7 +1,7 @@
 // controllers/userController.js
 
 
-const user=require('../models/User');
+const user=require('../models/userModel');
 
 
 exports.getAllUser=async(req,res)=>{

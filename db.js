@@ -1,20 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const dbURI ='mongodb+srv://shashisahani63531:123456789ok@cluster0.4vvt7hj.mongodb.net/sheycars?retryWrites=true&w=majority&appName=Cluster0'; // Update with your MongoDB database name
 
-function connectDB() {
-  const dbURI = 'mongodb://127.0.0.1:27017/sheycars'; // Update with your MongoDB database name
+mongoose.connect(dbURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-  return mongoose.connect(dbURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000,
-  })
-  .then(() => {
-    console.log('MongoDB connection successfully!');
-  })
-  .catch((err) => {
-    console.error('MongoDB connection failed:', err.message);
-    throw err; // Re-throw the error to propagate it to the calling code
-  });
-}
+const db = mongoose.connection;
 
-module.exports = connectDB;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", function () {
+  console.log("Connected to MongoDB");
+});
+
+module.exports = db;
+

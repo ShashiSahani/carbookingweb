@@ -1,4 +1,4 @@
-// backend/models/Car.js
+// backend/models/carModel.js
 const mongoose = require('mongoose'); // Adjust the path if needed
 
 const carSchema = new mongoose.Schema({
@@ -10,8 +10,8 @@ const carSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  capacity: {
-    type: Number,
+  SeatingCapacity: {
+    type: Number, 
   },
   fuelType: {
     type: String,
@@ -22,7 +22,7 @@ const carSchema = new mongoose.Schema({
       to: { type: String, required: true }
     }
   ],
-  rentPerHou: {
+  rentPerHour: {
     type: Number,
     required: true
   }
@@ -31,3 +31,4 @@ const carSchema = new mongoose.Schema({
 const Car = mongoose.model('Car', carSchema);
 
 module.exports = Car;
+
