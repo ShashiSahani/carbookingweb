@@ -28,15 +28,6 @@ const upload = multer({
     fileSize: 10 * 1024 * 1024, // 10MB file size limit
   },
 });
-
-// Route to handle image upload
-router.post("/upload", upload.single("profile"), (req, res) => {
-  res.json({
-    success: 1,
-    profile_url: `http://localhost:5000/images/${req.file.filename}`,
-  });
-});
-
 // Error handler for multer errors
 function errHandler(err, req, res, next) {
   if (err instanceof multer.MulterError) {
@@ -46,6 +37,16 @@ function errHandler(err, req, res, next) {
     });
   }
 }
+
+
+// Route to handle image upload
+router.post("/upload", upload.single("profile"), (req, res) => {
+  res.json({
+    success: 1,
+    profile_url: `http://localhost:5000/images/${req.file.filename}`,
+  });
+});
+
 
 // Get all cars
 router.get("/", async (req, res) => {
