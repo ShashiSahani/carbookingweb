@@ -16,4 +16,3 @@ const CarImage=mongoose.model('CarImage',carImageSchema);
 
 module.exports=CarImage;
 
-// 

@@ -1,19 +1,19 @@
 // controllers/userController.js
 
+const User = require("../models/userModel"); // Note: Changed variable name to avoid confusion with the model
 
-const user=require('../models/userModel');
+exports.getUserById = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId);
 
-
-exports.getAllUser=async(req,res)=>{
-    try {
-        const user=await user.findById(req.params.userId);
-
-        if (user.length === 0) {
-            return res.status(404).json({ message: 'No user found in the database.' });
-          }
-          res.json(user);
-    } catch (error) {
-       console.error(error);
-       res.status(500).json({error:"Internal Server error"})
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
     }
-}
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
